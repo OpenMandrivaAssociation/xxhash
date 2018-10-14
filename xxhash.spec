@@ -1,0 +1,70 @@
+%define major 0
+%define libname	%mklibname %name %{major}
+%define devname	%mklibname -d %name
+
+
+Name:		xxhash
+Version:	0.6.5
+Release:	2
+Summary:	Extremely fast hash algorithm
+
+#		The source for the library (xxhash.c and xxhash.h) is BSD
+#		The source for the command line tool (xxhsum.c) is GPLv2+
+License:	BSD and GPLv2+
+URL:		http://www.xxhash.com/
+Source0:	https://github.com/Cyan4973/xxHash/archive/v%{version}/%{name}-%{version}.tar.gz
+
+%description
+xxHash is an Extremely fast Hash algorithm, running at RAM speed
+limits. It successfully completes the SMHasher test suite which
+evaluates collision, dispersion and randomness qualities of hash
+functions. Code is highly portable, and hashes are identical on all
+platforms (little / big endian).
+
+%package -n	%{libname}
+Summary:	Extremely fast hash algorithm - library
+License:	BSD
+
+
+%description -n %{libname}
+xxHash is an Extremely fast Hash algorithm, running at RAM speed
+limits. It successfully completes the SMHasher test suite which
+evaluates collision, dispersion and randomness qualities of hash
+functions. Code is highly portable, and hashes are identical on all
+platforms (little / big endian).
+
+%package -n	%{devname}
+Summary:	Development files for %{name}
+Group:		Development/C
+Requires:	%{libname} = %{version}-%{release}
+Provides:	%{name}-devel = %{EVRD}
+
+%description -n %{devname}
+Development files for the xxhash library
+
+%prep
+%setup -q -n xxHash-%{version}
+
+%build
+%make %{?_smp_mflags} CFLAGS="%{optflags}" MOREFLAGS="%{?__global_ldflags}"
+
+%install
+make install DESTDIR=%{buildroot} PREFIX=%{_prefix} LIBDIR=%{_libdir}
+rm %{buildroot}/%{_libdir}/libxxhash.a
+
+%check
+make check
+make test-xxhsum-c
+
+%files
+%{_bindir}/xxh*sum
+%{_mandir}/man1/xxh*sum.1*
+
+%files -n %{libname}
+%{_libdir}/libxxhash.so.*
+
+%files -n %{devname}
+%license LICENSE
+%doc README.md
+%{_includedir}/xxhash.h
+%{_libdir}/libxxhash.so
