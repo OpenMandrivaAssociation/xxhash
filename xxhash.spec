@@ -64,7 +64,5 @@ make test-xxhsum-c
 %{_libdir}/libxxhash.so.*
 
 %files -n %{devname}
-%license LICENSE
-%doc README.md
 %{_includedir}/xxhash.h
 %{_libdir}/libxxhash.so
