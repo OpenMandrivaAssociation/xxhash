@@ -4,7 +4,7 @@
 
 
 Name:		xxhash
-Version:	0.7.0
+Version:	0.7.1
 Release:	1
 Summary:	Extremely fast hash algorithm
 
