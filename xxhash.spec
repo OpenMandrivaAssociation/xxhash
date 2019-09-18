@@ -5,7 +5,7 @@
 
 Name:		xxhash
 Version:	0.7.1
-Release:	1
+Release:	2
 Summary:	Extremely fast hash algorithm
 
 #		The source for the library (xxhash.c and xxhash.h) is BSD
@@ -47,7 +47,7 @@ Development files for the xxhash library
 
 %build
 %setup_compile_flags
-%make_build CFLAGS="%{optflags} -fPIC" FLAGS="%{?__global_ldflags}"
+%make_build CFLAGS="%{optflags} -fPIC -O3" FLAGS="%{_ldflags}"
 
 %install
 make install DESTDIR=%{buildroot} PREFIX=%{_prefix} LIBDIR=%{_libdir}
