@@ -47,7 +47,7 @@ Development files for the xxhash library
 
 %build
 %setup_compile_flags
-%make_build CFLAGS="%{optflags} -fPIC -O3" FLAGS="%{_ldflags}"
+%make_build CFLAGS="%{optflags} -fPIC -O3" FLAGS="%{ldflags}"
 
 %install
 make install DESTDIR=%{buildroot} PREFIX=%{_prefix} LIBDIR=%{_libdir}
