@@ -4,7 +4,7 @@
 
 
 Name:		xxhash
-Version:	0.7.2
+Version:	0.7.3
 Release:	1
 Summary:	Extremely fast hash algorithm
 
@@ -50,7 +50,7 @@ Development files for the xxhash library
 %make_build CFLAGS="%{optflags} -fPIC -O3" FLAGS="%{ldflags}"
 
 %install
-make install DESTDIR=%{buildroot} PREFIX=%{_prefix} LIBDIR=%{_libdir}
+%make_install PREFIX=%{_prefix} LIBDIR=%{_libdir}
 rm %{buildroot}/%{_libdir}/libxxhash.a
 
 %check
@@ -68,4 +68,6 @@ make test-xxhsum-c
 %license LICENSE
 %doc README.md
 %{_includedir}/xxhash.h
+%{_includedir}/xxh3.h
 %{_libdir}/libxxhash.so
+%{_libdir}/pkgconfig/libxxhash.pc
