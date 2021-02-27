@@ -46,6 +46,10 @@ Development files for the xxhash library
 %setup -q -n xxHash-%{version}
 
 %build
+%ifarch %{ix86}
+export CC=gcc
+export CXX=g++
+%endif
 %setup_compile_flags
 %make_build CFLAGS="%{optflags} -fPIC -O3" FLAGS="%{ldflags}"
 
