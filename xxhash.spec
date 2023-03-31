@@ -5,7 +5,7 @@
 
 Name:		xxhash
 Version:	0.8.1
-Release:	1
+Release:	2
 Summary:	Extremely fast hash algorithm
 
 #		The source for the library (xxhash.c and xxhash.h) is BSD
