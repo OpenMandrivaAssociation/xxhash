@@ -46,10 +46,8 @@ Development files for the xxhash library
 %setup -q -n xxHash-%{version}
 
 %build
-%ifarch %{ix86}
-export CC=gcc
-export CXX=g++
-%endif
+export CC="%{__cc}"
+export CXX="%{__cxx}"
 %setup_compile_flags
 %make_build CFLAGS="%{optflags} -fPIC -O3" FLAGS="%{ldflags}"
 
@@ -57,9 +55,11 @@ export CXX=g++
 %make_install PREFIX=%{_prefix} LIBDIR=%{_libdir}
 rm %{buildroot}/%{_libdir}/libxxhash.a
 
+%if ! %{cross_compiling}
 %check
 make check
 make test-xxhsum-c
+%endif
 
 %files
 %{_bindir}/xxh*sum
