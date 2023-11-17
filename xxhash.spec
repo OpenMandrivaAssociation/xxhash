@@ -1,11 +1,12 @@
 %define major 0
-%define libname	%mklibname %name %{major}
+%define oldlibname %mklibname %name 0
+%define libname	%mklibname %name
 %define devname	%mklibname -d %name
 
 
 Name:		xxhash
 Version:	0.8.2
-Release:	1
+Release:	2
 Summary:	Extremely fast hash algorithm
 
 #		The source for the library (xxhash.c and xxhash.h) is BSD
@@ -24,7 +25,7 @@ platforms (little / big endian).
 %package -n	%{libname}
 Summary:	Extremely fast hash algorithm - library
 License:	BSD
-
+%rename %{oldlibname}
 
 %description -n %{libname}
 xxHash is an Extremely fast Hash algorithm, running at RAM speed
@@ -43,7 +44,7 @@ Provides:	%{name}-devel = %{EVRD}
 Development files for the xxhash library
 
 %prep
-%setup -q -n xxHash-%{version}
+%autosetup -p1 -n xxHash-%{version}
 
 %build
 export CC="%{__cc}"
