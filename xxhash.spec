@@ -15,6 +15,7 @@ License:	BSD and GPLv2+
 URL:		https://www.xxhash.com/
 Source0:	https://github.com/Cyan4973/xxHash/archive/v%{version}/%{name}-%{version}.tar.gz
 
+BuildRequires:	make
 %description
 xxHash is an Extremely fast Hash algorithm, running at RAM speed
 limits. It successfully completes the SMHasher test suite which
