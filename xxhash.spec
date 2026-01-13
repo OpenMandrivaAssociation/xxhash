@@ -54,7 +54,9 @@ export CXX="%{__cxx}"
 %make_build CFLAGS="%{optflags} -fPIC -O3" FLAGS="%{ldflags}"
 
 %install
-%make_install PREFIX=%{_prefix} LIBDIR=%{_libdir}
+export CC="%{__cc}"
+export CXX="%{__cxx}"
+%make_install PREFIX=%{_prefix} LIBDIR=%{_libdir} CFLAGS="%{optflags} -fPIC -O3" FLAGS="%{ldflags}"
 rm %{buildroot}/%{_libdir}/libxxhash.a
 
 %if ! %{cross_compiling}
